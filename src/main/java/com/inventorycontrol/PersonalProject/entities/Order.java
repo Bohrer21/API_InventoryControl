@@ -16,6 +16,8 @@ public class Order implements Serializable {
     private int quantity;
     private double price;
 
+    private Client client;
+
     public Order() {
     }
 
@@ -58,6 +60,14 @@ public class Order implements Serializable {
         this.price = price;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,4 +80,5 @@ public class Order implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }
