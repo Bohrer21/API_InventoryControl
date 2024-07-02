@@ -1,10 +1,13 @@
 package com.inventorycontrol.PersonalProject.entities;
 
+import com.inventorycontrol.PersonalProject.dto.ClientDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -16,16 +19,19 @@ public class Order implements Serializable {
     private int quantity;
     private double price;
 
-    private Client client;
+    private ClientDTO cltDTO;
+
+    private List<Product> Products = new ArrayList<>();
 
     public Order() {
     }
 
-    public Order(String id, Date dateCreate, int quantity, double price) {
+    public Order(String id, Date dateCreate, int quantity, double price, ClientDTO cltDTO) {
         this.id = id;
         this.dateCreate = dateCreate;
         this.quantity = quantity;
         this.price = price;
+        this.cltDTO = cltDTO;
     }
 
     public String getId() {
@@ -60,12 +66,20 @@ public class Order implements Serializable {
         this.price = price;
     }
 
-    public Client getClient() {
-        return client;
+    public ClientDTO getCltDTO() {
+        return cltDTO;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setCltDTO(ClientDTO cltDTO) {
+        this.cltDTO = cltDTO;
+    }
+
+    public List<Product> getProducts() {
+        return Products;
+    }
+
+    public void setProducts(List<Product> products) {
+        Products = products;
     }
 
     @Override
@@ -80,5 +94,4 @@ public class Order implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
-
 }
