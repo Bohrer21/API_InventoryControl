@@ -1,5 +1,6 @@
 package com.inventorycontrol.PersonalProject.controller;
 
+import com.inventorycontrol.PersonalProject.entities.Order;
 import com.inventorycontrol.PersonalProject.entities.Product;
 import com.inventorycontrol.PersonalProject.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

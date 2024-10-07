@@ -1,8 +1,11 @@
 package com.inventorycontrol.PersonalProject.service;
 
+import com.inventorycontrol.PersonalProject.dto.OrderItemDTO;
+import com.inventorycontrol.PersonalProject.entities.Order;
 import com.inventorycontrol.PersonalProject.entities.Product;
 import com.inventorycontrol.PersonalProject.repository.ProductRepository;
 import com.inventorycontrol.PersonalProject.service.exceptions.ObjectNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,7 @@ public class ProductService {
 
     @Autowired
     private ProductRepository repository;
+
 
     public List<Product> findAll(){
         return repository.findAll();

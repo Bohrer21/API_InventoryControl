@@ -1,5 +1,8 @@
 package com.inventorycontrol.PersonalProject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.inventorycontrol.PersonalProject.dto.OrderItemDTO;
+import com.inventorycontrol.PersonalProject.dto.ProductDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,12 +16,15 @@ public class Stock implements Serializable {
     private String id;
     private int quantity;
 
+    private ProductDTO product;
+
     public Stock() {
     }
 
-    public Stock(String id, int quantity) {
+    public Stock(String id, int quantity, ProductDTO product) {
         this.id = id;
         this.quantity = quantity;
+        this.product = product;
     }
 
     public String getId() {
@@ -37,6 +43,12 @@ public class Stock implements Serializable {
         this.quantity = quantity;
     }
 
+    public ProductDTO getProduct() {
+        return product;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,4 +61,6 @@ public class Stock implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+
 }

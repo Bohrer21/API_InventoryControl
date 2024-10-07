@@ -1,6 +1,7 @@
 package com.inventorycontrol.PersonalProject.entities;
 
 import com.inventorycontrol.PersonalProject.dto.ClientDTO;
+import com.inventorycontrol.PersonalProject.dto.OrderItemDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,22 +17,18 @@ public class Order implements Serializable {
     @Id
     private String id;
     private Date dateCreate;
-    private int quantity;
-    private double price;
 
-    private ClientDTO cltDTO;
+    private ClientDTO client;
 
-    private List<Product> Products = new ArrayList<>();
+    private List<OrderItemDTO> items = new ArrayList<>();
 
     public Order() {
     }
 
-    public Order(String id, Date dateCreate, int quantity, double price, ClientDTO cltDTO) {
+    public Order(String id, Date dateCreate, ClientDTO client) {
         this.id = id;
         this.dateCreate = dateCreate;
-        this.quantity = quantity;
-        this.price = price;
-        this.cltDTO = cltDTO;
+        this.client = client;
     }
 
     public String getId() {
@@ -50,36 +47,28 @@ public class Order implements Serializable {
         this.dateCreate = dateCreate;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public ClientDTO getClient() {
+        return client;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setClient(ClientDTO client) {
+        this.client = client;
     }
 
-    public double getPrice() {
-        return price;
+    public List<OrderItemDTO> getItems() {
+        return items;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setItems(List<OrderItemDTO> items) {
+        this.items = items;
     }
 
-    public ClientDTO getCltDTO() {
-        return cltDTO;
-    }
-
-    public void setCltDTO(ClientDTO cltDTO) {
-        this.cltDTO = cltDTO;
-    }
-
-    public List<Product> getProducts() {
-        return Products;
-    }
-
-    public void setProducts(List<Product> products) {
-        Products = products;
+    public double getTotal(){
+        double sum = 0;
+        for(OrderItemDTO x : items) {
+            sum += x.getSubTotal();
+        }
+        return sum;
     }
 
     @Override

@@ -47,6 +47,7 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,4 +60,6 @@ public class Product implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+
 }
