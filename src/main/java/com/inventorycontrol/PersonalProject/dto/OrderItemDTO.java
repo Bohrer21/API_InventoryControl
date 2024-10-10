@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 public class OrderItemDTO implements Serializable {
 
-    @JsonIgnore
     private String idStock;
     private int quantity;
     private double price;

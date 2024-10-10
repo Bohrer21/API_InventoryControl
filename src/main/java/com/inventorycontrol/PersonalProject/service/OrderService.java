@@ -7,7 +7,6 @@ import com.inventorycontrol.PersonalProject.entities.Order;
 import com.inventorycontrol.PersonalProject.entities.Product;
 import com.inventorycontrol.PersonalProject.entities.Stock;
 import com.inventorycontrol.PersonalProject.repository.OrderRepository;
-import com.inventorycontrol.PersonalProject.repository.ProductRepository;
 import com.inventorycontrol.PersonalProject.repository.StockRepository;
 import com.inventorycontrol.PersonalProject.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class OrderService {
     private OrderRepository repository;
 
     @Autowired
-    private ProductRepository pdrRepository;
+    private StockRepository stockRepository;
 
     public List<Order> findAll(){
         return repository.findAll();
@@ -36,6 +35,21 @@ public class OrderService {
 
     public void insert(Order odr){
         repository.insert(odr);
+    }
+
+    public void up(Order odr){
+
+        for(OrderItemDTO item: odr.getItems()){
+            Stock stk = stockRepository.findById(item.getIdStock()).orElseThrow(() -> new ObjectNotFoundException("Número do ID incorreto"));
+
+            if(stk.getQuantity() >= item.getQuantity()){
+                stk.setQuantity(stk.getQuantity() - item.getQuantity());
+
+            } else{
+                throw new ObjectNotFoundException("Quantidade insuficiente no estoque");
+            }
+            stockRepository.save(stk);
+        }
     }
 
     public void delete(String id){

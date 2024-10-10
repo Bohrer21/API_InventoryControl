@@ -11,6 +11,7 @@ import com.inventorycontrol.PersonalProject.repository.ClientRepository;
 import com.inventorycontrol.PersonalProject.repository.OrderRepository;
 import com.inventorycontrol.PersonalProject.repository.ProductRepository;
 import com.inventorycontrol.PersonalProject.repository.StockRepository;
+import com.inventorycontrol.PersonalProject.service.OrderService;
 import com.inventorycontrol.PersonalProject.service.ProductService;
 
 import com.inventorycontrol.PersonalProject.service.StockService;
@@ -37,7 +38,7 @@ public class test implements CommandLineRunner {
     private StockRepository stk;
 
     @Autowired
-    private StockService service;
+    private OrderService service;
 
     @Override
     public void run(String... args) throws Exception {
@@ -64,13 +65,13 @@ public class test implements CommandLineRunner {
         ProductDTO pdr01 = new ProductDTO(pdr1);
         ProductDTO pdr02 = new ProductDTO(pdr2);
 
-        Stock stkCamisa = new Stock(null, 10, pdr01);
-        Stock stkBermuda = new Stock(null, 7, pdr02);
+        Stock stkShirt = new Stock(null, 10, pdr01);
+        Stock stkShorts = new Stock(null, 7, pdr02);
 
-        stk.saveAll(Arrays.asList(stkCamisa, stkBermuda));
+        stk.saveAll(Arrays.asList(stkShirt, stkShorts));
 
-        OrderItemDTO odr1 = new OrderItemDTO(stkCamisa.getId(), 2, pdr1.getPrice(), pdr01);
-        OrderItemDTO odr2 = new OrderItemDTO(stkBermuda.getId(), 1, pdr2.getPrice(), pdr02);
+        OrderItemDTO odr1 = new OrderItemDTO(stkShirt.getId(), 2, pdr1.getPrice(), pdr01);
+        OrderItemDTO odr2 = new OrderItemDTO(stkShorts.getId(), 1, pdr2.getPrice(), pdr02);
 
         Order order1 = new Order(null, sdf.parse("02/07/2024"), new ClientDTO(lucas));
 

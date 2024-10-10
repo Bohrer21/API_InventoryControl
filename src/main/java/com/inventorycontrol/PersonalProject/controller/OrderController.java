@@ -1,6 +1,7 @@
 package com.inventorycontrol.PersonalProject.controller;
 
 import com.inventorycontrol.PersonalProject.entities.Order;
+import com.inventorycontrol.PersonalProject.entities.Stock;
 import com.inventorycontrol.PersonalProject.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,7 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody Order odr){
         service.insert(odr);
+        service.up(odr);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(odr.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }

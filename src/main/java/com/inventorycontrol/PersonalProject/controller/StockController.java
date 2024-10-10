@@ -37,11 +37,4 @@ public class StockController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(stk.getId()).toUri();
         return ResponseEntity.noContent().build();
     }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody Stock stk, @PathVariable String id){
-        stk.setId(id);
-        stk = service.update(stk);
-        return ResponseEntity.noContent().build();
-    }
 }
